@@ -1,0 +1,10 @@
+POST https://images-mock-01.loca.lt/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Accept: application/json
+
+--WebAppBoundary
+Content-Disposition: form-data; name="photo"; filename="cover.jpg"
+Content-Type: image/jpeg
+
+< ./assets/cover.jpg
+--WebAppBoundary--

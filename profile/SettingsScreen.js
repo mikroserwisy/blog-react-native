@@ -1,10 +1,12 @@
 import { View, StyleSheet, ImageBackground, Dimensions, Animated, StatusBar, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons"
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../redux';
 
 const screenHeight = Dimensions.get('window').height;
 
-export default function(props) {
+const SettingsScreen = (props) => {
 
     const [top, setTop] = useState(new Animated.Value(screenHeight));
 
@@ -27,6 +29,12 @@ export default function(props) {
     );
 
 }
+
+const mapStateToProps = (state) => ({show: state.showSettings});
+
+const mapDispatchToProps = (dispatch) => ({ close: () => dispatch({type: actions.hideSettings})});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);
 
 const styles = StyleSheet.create({
     container: {

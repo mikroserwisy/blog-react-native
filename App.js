@@ -1,25 +1,59 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import globalStyles from './global.styles';
-import ArticlesScreen from './articles/ArticlesScreen';
+import { StyleSheet } from 'react-native';
 import ArticleScreen from './articles/ArticleScreen';
+import ArticlesScreen from './articles/ArticlesScreen';
+import {Ionicons} from '@expo/vector-icons'
+import ProfileScreen from './profile/ProfileScreen';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { reducer } from './redux';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const Tab = createBottomTabNavigator();
+
+const ArticlesStack = () => (
+   <Stack.Navigator>
+     <Stack.Screen name="ArticlesScreen" component={ArticlesScreen} options={{ title: 'Articles' }}/>
+     <Stack.Screen name="ArticleScreen" component={ArticleScreen}/>
+   </Stack.Navigator>
+);
+
+const ProfileStack = () => (
+   <Stack.Navigator>
+     <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Profile' }}/>
+   </Stack.Navigator>
+);
+
+const focusedColor = '#4775f2';
+const defaultColor = '#b8bece'
+
+const articlesTab = ({focused}) => (
+  <Ionicons name='document' size={25} color={focused ? focusedColor : defaultColor}/>
+);
+
+const profileTab = ({focused}) => (
+  <Ionicons name='person' size={25} color={focused ? focusedColor : defaultColor}/>
+);
+
+const tabNavigatorScreenOptions = {
+  headerShown: false
+
+};
+
+export default (App) => {
   return (
-    // <SafeAreaView style={globalStyles.androidSafeArea}>
-    //   <Articles/>
-    // </SafeAreaView>
-    <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen name="Articles" component={ArticlesScreen} options={{ title: 'Articles' }}/>
-            <Stack.Screen name="Article" component={ArticleScreen}/>
-        </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={createStore(reducer)}>
+      <NavigationContainer>
+          <Tab.Navigator screenOptions={tabNavigatorScreenOptions}>
+            <Tab.Screen name="ArticlesList" component={ArticlesStack} options={{tabBarIcon: articlesTab}}/>
+            <Tab.Screen name="Profile" component={ProfileStack} options={{tabBarIcon: profileTab}}/>
+          </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

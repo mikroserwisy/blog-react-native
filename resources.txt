@@ -1,0 +1,20 @@
+https://www.reactnative.express
+
+Navigation
+https://reactnavigation.org
+https://wix.github.io/react-native-navigation/docs/before-you-start
+
+Biblioteki komponentów
+https://github.com/react-native-elements/react-native-elements
+https://github.com/GeekyAnts/NativeBase
+
+Hooks
+https://daveceddia.com/react-hooks/
+https://daveceddia.com/usecontext-hook
+https://www.reactnative.express/react/hooks
+
+Storage
+https://react-native-async-storage.github.io/async-storage
+https://docs.expo.dev/versions/latest/sdk/sqlite/docs/install
+https://github.com/expo/examples/tree/master/with-sqlite
+

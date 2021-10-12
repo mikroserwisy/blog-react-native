@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { View, Text, Image, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import React from 'react';
 
-export default function(props) {
+export default (props) => {
     const article = props.article;
     return (
         <View style={styles.container}>
