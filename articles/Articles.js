@@ -1,6 +1,7 @@
 import { formatDate } from "../commons";
 import { articlesEndpoint, baseBackendUrl } from "../config";
 import * as SQLite from 'expo-sqlite';
+import { actions, dispatch } from "../redux";
 
 const mapArticle = (article) => ({
     uri: article.uri,
@@ -26,21 +27,24 @@ const save = (articles) => {
     return articles;
 };
 
-const getArticles = async () => {
+const refreshArticles = async () => {
+    dispatch({type: actions.inProgress});
     const response = await fetch(articlesEndpoint);
     if (response.status === 200) {
         return await response.json()
             .then((articles) => articles.map(mapArticle))
             .then(save)
+            .then((articles) => dispatch({type: actions.articlesRefreshed, articles}))
+            .finally(() => dispatch({type: actions.idle}));
     } else {
         console.log(response.status);
     }
 };
 
-const getCachedArticles = (onSuccess) => {
+const getCachedArticles = () => {
     db.transaction((tx) => {
-         tx.executeSql('select * from articles', [], (_, {rows: {_array}} ) => onSuccess(_array || []));
+         tx.executeSql('select * from articles', [], (_, {rows: {_array}} ) => dispatch({type: actions.articlesRefreshed, articles: _array}));
     });
 };
 
-export {getArticles, getCachedArticles};
+export {refreshArticles, getCachedArticles};

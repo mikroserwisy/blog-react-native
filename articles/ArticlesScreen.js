@@ -1,53 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
 import ArticleSummary from './ArticleSummary';
-import {getArticles, getCachedArticles } from './Articles'
+import {refreshArticles, getCachedArticles } from './Articles'
 import SettingsScreen from '../profile/SettingsScreen';
+import { connect } from 'react-redux';
 
-export default ({navigation}) => {
+const ArticlesScreen = (props) => {
 
-    const [articles, setArticles] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+    const showDetails = (article) => props.navigation.push('Article', {article})
 
     useEffect(() => {
-        setLoading(true);
-        getCachedArticles(setArticles);
-        setLoading(false);
-    }, [])
+        getCachedArticles();
+    }, []);
 
-    const onError = (error) => {
-        console.log('##' + error);
-    }
-
-    const showDetails = (article) => navigation.push('Article', {article})
-
-    const refresh = () => {
-        setLoading(true);
-        getArticles()
-            .then(setArticles)
-            .catch(onError)
-            .finally(() => setLoading(false))
-    };
-    
     return (
         <>
-            <Button title="Refresh" onPress={refresh}/>
+            <Button title="Refresh" onPress={refreshArticles}/>
             <View style={styles.container}>
-                { isLoading ? 
+                { props.inProgress ? 
                     <ActivityIndicator size="large" color="#0000ff"/> :
                     <FlatList 
-                        data={articles} keyExtractor={({uri}) => uri} 
+                        data={props.articles} keyExtractor={({uri}) => uri} articles
                         renderItem={({item}) => (
                             <TouchableOpacity onPress={() => showDetails(item)}>
                                 <ArticleSummary article={item}/>
                             </TouchableOpacity>
                         )}/>
                 }       
-        </View>
+            </View>
         </>
     );
 
 }
+
+const mapStateToProps = (state) => ({inProgress: state.inProgress, articles: state.articles});
+
+const mapDispatchToProps = (dispatch) => ({ });
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlesScreen);
 
 const styles = StyleSheet.create({
     container: {

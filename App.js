@@ -8,8 +8,7 @@ import ArticlesScreen from './articles/ArticlesScreen';
 import {Ionicons} from '@expo/vector-icons'
 import ProfileScreen from './profile/ProfileScreen';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { reducer } from './redux';
+import { store } from './redux';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,7 +44,7 @@ const tabNavigatorScreenOptions = {
 
 export default (App) => {
   return (
-    <Provider store={createStore(reducer)}>
+    <Provider store={store}>
       <NavigationContainer>
           <Tab.Navigator screenOptions={tabNavigatorScreenOptions}>
             <Tab.Screen name="ArticlesList" component={ArticlesStack} options={{tabBarIcon: articlesTab}}/>
