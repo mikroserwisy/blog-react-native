@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
 import ArticleSummary from './ArticleSummary';
-import getArticles from './Articles'
+import {getArticles, getCachedArticles } from './Articles'
 import SettingsScreen from '../profile/SettingsScreen';
 
 export default ({navigation}) => {
@@ -10,11 +10,9 @@ export default ({navigation}) => {
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
-        setArticles(true)
-        getArticles()
-            .then(setArticles)
-            .catch(onError)
-            .finally(() => setLoading(false))
+        setLoading(true);
+        getCachedArticles(setArticles);
+        setLoading(false);
     }, [])
 
     const onError = (error) => {
@@ -22,9 +20,18 @@ export default ({navigation}) => {
     }
 
     const showDetails = (article) => navigation.push('Article', {article})
+
+    const refresh = () => {
+        setLoading(true);
+        getArticles()
+            .then(setArticles)
+            .catch(onError)
+            .finally(() => setLoading(false))
+    };
     
     return (
         <>
+            <Button title="Refresh" onPress={refresh}/>
             <View style={styles.container}>
                 { isLoading ? 
                     <ActivityIndicator size="large" color="#0000ff"/> :

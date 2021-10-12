@@ -41,7 +41,6 @@ const profileTab = ({focused}) => (
 
 const tabNavigatorScreenOptions = {
   headerShown: false
-
 };
 
 export default (App) => {
