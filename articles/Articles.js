@@ -3,15 +3,11 @@ import { articlesEndpoint, baseBackendUrl } from "../config";
 import * as SQLite from 'expo-sqlite';
 import { actions, dispatch } from "../redux";
 
-const mapArticle = (article) => ({
-    uri: article.uri,
-    title: article.title,
-    cover: `${baseBackendUrl}/${article.cover.formats.large.url}`,
-    timestamp: formatDate(article.published_at),
-    excerpt: article.excerpt,
-    content: article.content,
-    tags: article.tags.map((tag) => tag.name)
-});
+const articlesRefreshed = (articles) => dispatch({type: actions.articlesRefreshed, articles});
+
+const inProgress = () => dispatch({type: actions.inProgress});
+
+const idle = () => dispatch({type: actions.idle});
 
 const db = SQLite.openDatabase('data.db');
 
@@ -27,15 +23,25 @@ const save = (articles) => {
     return articles;
 };
 
+const mapArticle = (article) => ({
+    uri: article.uri,
+    title: article.title,
+    cover: `${baseBackendUrl}/${article.cover.formats.large.url}`,
+    timestamp: formatDate(article.published_at),
+    excerpt: article.excerpt,
+    content: article.content,
+    tags: article.tags.map((tag) => tag.name)
+});
+
 const refreshArticles = async () => {
-    dispatch({type: actions.inProgress});
+    inProgress();
     const response = await fetch(articlesEndpoint);
     if (response.status === 200) {
         return await response.json()
             .then((articles) => articles.map(mapArticle))
             .then(save)
-            .then((articles) => dispatch({type: actions.articlesRefreshed, articles}))
-            .finally(() => dispatch({type: actions.idle}));
+            .then(articlesRefreshed)
+            .finally(idle);
     } else {
         console.log(response.status);
     }
@@ -43,7 +49,7 @@ const refreshArticles = async () => {
 
 const getCachedArticles = () => {
     db.transaction((tx) => {
-         tx.executeSql('select * from articles', [], (_, {rows: {_array}} ) => dispatch({type: actions.articlesRefreshed, articles: _array}));
+         tx.executeSql('select * from articles', [], (_, {rows: {_array}}) => articlesRefreshed(_array));
     });
 };
 

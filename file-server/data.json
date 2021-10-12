@@ -1,0 +1,103 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "uri": "react-native-w-praktyce",
+            "title": "React Native w praktyce",
+            "excerpt": "React Native combines the best parts of native development with React, a best-in-class JavaScript library for building user interfaces. Use a little—or a lot. You can use React Native today in your existing Android and iOS projects or you can create a whole new app from scratch.",
+            "content": "Written in JavaScript—rendered with native code\nReact primitives render to native platform UI, meaning your app uses the same native platform APIs other apps do.\nMany platforms, one React. Create platform-specific versions of components so a single codebase can share code across platforms. With React Native, one team can maintain two platforms and share a common technology—React.\nSeamless Cross-Platform\nReact components wrap existing native code and interact with native APIs via React’s declarative UI paradigm and JavaScript. This enables native app development for whole new teams of developers, and can let existing native teams work much faster.",
+            "videoUrl": "https://vimeo.com",
+            "repositoryUrl": "https://github.com",
+            "description": "Opis artykułu",
+            "published_at": "2021-10-09T20:10:28.380Z",
+            "created_at": "2021-10-09T20:01:44.864Z",
+            "updated_at": "2021-10-11T13:44:21.659Z",
+            "cover": {
+                "id": 2,
+                "name": "react-native_large.jpg",
+                "alternativeText": "",
+                "caption": "",
+                "width": 1417,
+                "height": 834,
+                "formats": {
+                    "thumbnail": {
+                        "name": "thumbnail_react-native_large.jpg",
+                        "hash": "thumbnail_react_native_large_db0d13e40f",
+                        "ext": ".jpg",
+                        "mime": "image/jpeg",
+                        "width": 245,
+                        "height": 144,
+                        "size": 7.16,
+                        "path": null,
+                        "url": "/uploads/thumbnail_react_native_large_db0d13e40f.jpg"
+                    },
+                    "large": {
+                        "name": "large_react-native_large.jpg",
+                        "hash": "large_react_native_large_db0d13e40f",
+                        "ext": ".jpg",
+                        "mime": "image/jpeg",
+                        "width": 1000,
+                        "height": 589,
+                        "size": 47.08,
+                        "path": null,
+                        "url": "/uploads/large_react_native_large_db0d13e40f.jpg"
+                    },
+                    "medium": {
+                        "name": "medium_react-native_large.jpg",
+                        "hash": "medium_react_native_large_db0d13e40f",
+                        "ext": ".jpg",
+                        "mime": "image/jpeg",
+                        "width": 750,
+                        "height": 441,
+                        "size": 33.03,
+                        "path": null,
+                        "url": "/uploads/medium_react_native_large_db0d13e40f.jpg"
+                    },
+                    "small": {
+                        "name": "small_react-native_large.jpg",
+                        "hash": "small_react_native_large_db0d13e40f",
+                        "ext": ".jpg",
+                        "mime": "image/jpeg",
+                        "width": 500,
+                        "height": 294,
+                        "size": 19.2,
+                        "path": null,
+                        "url": "/uploads/small_react_native_large_db0d13e40f.jpg"
+                    }
+                },
+                "hash": "react_native_large_db0d13e40f",
+                "ext": ".jpg",
+                "mime": "image/jpeg",
+                "size": 71.75,
+                "url": "/uploads/react_native_large_db0d13e40f.jpg",
+                "previewUrl": null,
+                "provider": "local",
+                "provider_metadata": null,
+                "created_at": "2021-10-11T11:18:13.039Z",
+                "updated_at": "2021-10-11T11:18:13.050Z"
+            },
+            "tags": [
+                {
+                    "id": 1,
+                    "name": "java",
+                    "created_at": "2021-10-03T20:29:12.255Z",
+                    "updated_at": "2021-10-03T20:29:12.263Z"
+                },
+                {
+                    "id": 3,
+                    "name": "kube",
+                    "created_at": "2021-10-03T20:31:05.142Z",
+                    "updated_at": "2021-10-03T20:31:05.148Z"
+                }
+            ],
+            "keywords": [
+                {
+                    "id": 1,
+                    "name": "java",
+                    "created_at": "2021-10-10T12:40:27.566Z",
+                    "updated_at": "2021-10-10T12:40:27.573Z"
+                }
+            ]
+        }
+    ]
+}
