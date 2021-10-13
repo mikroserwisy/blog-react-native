@@ -6,6 +6,7 @@ import { actions } from '../redux';
 import PhotoPicker from '../components/PhotoPicker';
 import { upload } from '../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Avatar from '../components/Avatar';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -25,7 +26,7 @@ const SettingsScreen = (props) => {
     const AnimatedComponent = Animated.createAnimatedComponent(View);
 
     const uploadPhoto = () => {
-        upload(image)
+        upload(image);
             //.then(error => Alert.alert('Failed'))
             //.then(response => console.log(response))
             //.catch(error => Alert.alert(error));
@@ -47,6 +48,7 @@ const SettingsScreen = (props) => {
             <TouchableOpacity onPress={props.close} style={styles.closeButton}>
                 <Ionicons name="close-outline" size={40} color="#546bfb"/>
             </TouchableOpacity>
+            <Avatar/>
             <PhotoPicker image={image} setImage={setImage}/>
             <Button title="Save" onPress={uploadPhoto}/>
         </AnimatedComponent>

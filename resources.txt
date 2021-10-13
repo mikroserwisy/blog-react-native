@@ -18,3 +18,9 @@ https://react-native-async-storage.github.io/async-storage
 https://docs.expo.dev/versions/latest/sdk/sqlite/docs/install
 https://github.com/expo/examples/tree/master/with-sqlite
 
+Debugging
+https://blog.logrocket.com/debugging-your-app-with-react-native-debugger
+
+Testing
+https://github.com/callstack/react-native-testing-library
+https://testing-library.com/docs/react-native-testing-library/intro
